@@ -1,5 +1,9 @@
 # Building REST APIs with FastAPI
 
+<p align="center">
+  <img src="hero.svg" alt="Building REST APIs with FastAPI" width="100%">
+</p>
+
 A production-ready FastAPI application demonstrating best practices for building high-performance REST APIs with automatic documentation, type safety, and modern Python features.
 
 ## Features
