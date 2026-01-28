@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+
+    <linearGradient id="node-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+
+    <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes float-node {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes pulse-endpoint {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    @keyframes flow-data {
+      0% { stroke-dashoffset: 100; opacity: 0.4; }
+      50% { opacity: 0.8; }
+      100% { stroke-dashoffset: 0; opacity: 0.4; }
+    }
+
+    @keyframes speed-line {
+      0% { transform: translateX(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      100% { transform: translateX(300px); opacity: 0; }
+    }
+
+    @keyframes rotate-orbit {
+      from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+    }
+
+    .endpoint-node {
+      animation: float-node 6s ease-in-out infinite;
+    }
+
+    .api-node {
+      animation: pulse-endpoint 3s ease-in-out infinite;
+    }
+
+    .connection-line {
+      stroke-dasharray: 10 5;
+      animation: flow-data 4s linear infinite;
+    }
+
+    .speed-line {
+      animation: speed-line 2s ease-out infinite;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+
+  <!-- Circuit-like pattern in background -->
+  <g opacity="0.08">
+    <path d="M100,100 L300,100 L300,200 L500,200" stroke="#10b981" stroke-width="2" fill="none"/>
+    <path d="M700,150 L900,150 L900,250 L1100,250" stroke="#10b981" stroke-width="2" fill="none"/>
+    <path d="M200,400 L400,400 L400,500 L600,500" stroke="#10b981" stroke-width="2" fill="none"/>
+    <circle cx="300" cy="100" r="4" fill="#34d399"/>
+    <circle cx="300" cy="200" r="4" fill="#34d399"/>
+    <circle cx="900" cy="150" r="4" fill="#34d399"/>
+    <circle cx="900" cy="250" r="4" fill="#34d399"/>
+  </g>
+
+  <!-- Central API hub -->
+  <g class="api-hub">
+    <circle cx="600" cy="315" r="45" fill="url(#node-gradient)" opacity="0.3"/>
+    <circle cx="600" cy="315" r="30" fill="url(#node-gradient)" opacity="0.6" filter="url(#glow)"/>
+    <circle class="api-node" cx="600" cy="315" r="18" fill="#34d399" filter="url(#glow)"/>
+
+    <!-- Pulsing rings around hub -->
+    <circle cx="600" cy="315" r="25" fill="none" stroke="#10b981" stroke-width="2" opacity="0.4">
+      <animate attributeName="r" values="25;55;25" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Endpoint nodes (API endpoints) -->
+  <g class="endpoints">
+    <!-- Top endpoints -->
+    <g class="endpoint-node" style="animation-delay: 0s">
+      <circle cx="350" cy="120" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="350" cy="120" r="15" fill="#10b981" opacity="0.8" filter="url(#glow)"/>
+    </g>
+
+    <g class="endpoint-node" style="animation-delay: -1s">
+      <circle cx="850" cy="140" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="850" cy="140" r="15" fill="#6ee7b7" opacity="0.8" filter="url(#glow)"/>
+    </g>
+
+    <!-- Side endpoints -->
+    <g class="endpoint-node" style="animation-delay: -2s">
+      <circle cx="200" cy="315" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="200" cy="315" r="15" fill="#34d399" opacity="0.8" filter="url(#glow)"/>
+    </g>
+
+    <g class="endpoint-node" style="animation-delay: -3s">
+      <circle cx="1000" cy="315" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="1000" cy="315" r="15" fill="#10b981" opacity="0.8" filter="url(#glow)"/>
+    </g>
+
+    <!-- Bottom endpoints -->
+    <g class="endpoint-node" style="animation-delay: -4s">
+      <circle cx="400" cy="510" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="400" cy="510" r="15" fill="#6ee7b7" opacity="0.8" filter="url(#glow)"/>
+    </g>
+
+    <g class="endpoint-node" style="animation-delay: -5s">
+      <circle cx="800" cy="490" r="25" fill="url(#node-gradient)" opacity="0.2"/>
+      <circle cx="800" cy="490" r="15" fill="#34d399" opacity="0.8" filter="url(#glow)"/>
+    </g>
+  </g>
+
+  <!-- Bidirectional data flows -->
+  <g class="data-flows">
+    <line class="connection-line" x1="350" y1="120" x2="600" y2="315" stroke="#10b981" stroke-width="2.5" opacity="0.5" style="animation-delay: 0s"/>
+    <line class="connection-line" x1="850" y1="140" x2="600" y2="315" stroke="#34d399" stroke-width="2.5" opacity="0.5" style="animation-delay: -0.5s"/>
+    <line class="connection-line" x1="200" y1="315" x2="600" y2="315" stroke="#6ee7b7" stroke-width="2.5" opacity="0.5" style="animation-delay: -1s"/>
+    <line class="connection-line" x1="1000" y1="315" x2="600" y2="315" stroke="#10b981" stroke-width="2.5" opacity="0.5" style="animation-delay: -1.5s"/>
+    <line class="connection-line" x1="400" y1="510" x2="600" y2="315" stroke="#34d399" stroke-width="2.5" opacity="0.5" style="animation-delay: -2s"/>
+    <line class="connection-line" x1="800" y1="490" x2="600" y2="315" stroke="#6ee7b7" stroke-width="2.5" opacity="0.5" style="animation-delay: -2.5s"/>
+  </g>
+
+  <!-- Speed lines showing performance -->
+  <g class="performance-indicators">
+    <rect class="speed-line" x="100" y="200" width="80" height="3" fill="url(#accent-gradient)" opacity="0.6" style="animation-delay: 0s"/>
+    <rect class="speed-line" x="100" y="250" width="60" height="2" fill="#fbbf24" opacity="0.5" style="animation-delay: 0.3s"/>
+    <rect class="speed-line" x="100" y="300" width="100" height="3" fill="url(#accent-gradient)" opacity="0.6" style="animation-delay: 0.6s"/>
+    <rect class="speed-line" x="100" y="350" width="70" height="2" fill="#f59e0b" opacity="0.5" style="animation-delay: 0.9s"/>
+    <rect class="speed-line" x="100" y="400" width="90" height="3" fill="url(#accent-gradient)" opacity="0.6" style="animation-delay: 1.2s"/>
+  </g>
+
+  <!-- Orbiting data packets -->
+  <g>
+    <circle r="6" fill="#fbbf24" opacity="0.8">
+      <animateMotion dur="8s" repeatCount="indefinite" path="M600,315 m-80,0 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0"/>
+    </circle>
+    <circle r="5" fill="#f59e0b" opacity="0.7">
+      <animateMotion dur="10s" repeatCount="indefinite" path="M600,315 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"/>
+    </circle>
+    <circle r="6" fill="#fbbf24" opacity="0.8">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M600,315 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0"/>
+    </circle>
+  </g>
+
+  <!-- Network mesh pattern -->
+  <g opacity="0.15">
+    <path d="M350,120 L850,140 L1000,315 L800,490 L400,510 L200,315 Z" stroke="#10b981" stroke-width="1.5" fill="none" stroke-dasharray="5 5">
+      <animate attributeName="stroke-dashoffset" from="0" to="20" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Accent glows -->
+  <circle cx="600" cy="315" r="150" fill="#10b981" opacity="0.02">
+    <animate attributeName="opacity" values="0.02;0.06;0.02" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="350" cy="120" r="80" fill="#34d399" opacity="0.02">
+    <animate attributeName="opacity" values="0.02;0.05;0.02" dur="7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="800" cy="490" r="90" fill="#6ee7b7" opacity="0.02">
+    <animate attributeName="opacity" values="0.02;0.05;0.02" dur="8s" repeatCount="indefinite"/>
+  </circle>
+</svg>
