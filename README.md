@@ -98,7 +98,6 @@ docker run -p 8000:8000 fastapi-app
 │   ├── DEPLOYMENT.md           # Deployment guide
 │   └── DEVELOPMENT.md          # Development guide
 ├── requirements.txt
-├── requirements-dev.txt
 ├── Dockerfile
 ├── docker-compose.yml
 ├── .env.example
@@ -302,3 +301,8 @@ For issues and questions:
 - Check the [API Documentation](documentation/API.md)
 - Review existing GitHub issues
 - Open a new issue with detailed information
+
+<!-- org-footer -->
+---
+
+<p align="center"><sub>Part of <a href="https://github.com/ry-ops">ry-ops</a> · building the pipes between infrastructure, automation, and observability · built by <a href="https://github.com/ry-ops">ry-ops</a></sub></p>
