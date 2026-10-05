@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="960" height="360" role="img" aria-labelledby="t d">
+  <title id="t">How a request flows through the FastAPI app</title>
+  <desc id="d">A request flows through routers (auth and users), Pydantic schemas that validate it, SQLAlchemy models, then the async database. JWT security guards protected routes. Tested with pytest, shipped with Docker.</desc>
+  <style>
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; fill:#e6ebf5; }
+    .muted { fill:#8b96ad; } .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    @keyframes f0 { 0%,11.11% { offset-distance:0%; opacity:0 } 12.22% {opacity:1} 23.33% { offset-distance:100%; opacity:1 } 25.00%,100% {opacity:0} } .f0 { animation:f0 9.0s infinite; offset-path: path('M220 230 L 250 230'); }
+    @keyframes f1 { 0%,27.78% { offset-distance:0%; opacity:0 } 28.89% {opacity:1} 40.00% { offset-distance:100%; opacity:1 } 41.67%,100% {opacity:0} } .f1 { animation:f1 9.0s infinite; offset-path: path('M410 230 L 440 230'); }
+    @keyframes f2 { 0%,44.44% { offset-distance:0%; opacity:0 } 45.56% {opacity:1} 56.67% { offset-distance:100%; opacity:1 } 58.33%,100% {opacity:0} } .f2 { animation:f2 9.0s infinite; offset-path: path('M610 230 L 640 230'); }
+    @keyframes b0 { 0%,6.67% { stroke-opacity:.35 } 8.89%,24.44% { stroke-opacity:1 } 27.78%,100% { stroke-opacity:.35 } } .b0 { animation:b0 9.0s infinite; }
+    @keyframes b1 { 0%,23.33% { stroke-opacity:.35 } 25.56%,41.11% { stroke-opacity:1 } 44.44%,100% { stroke-opacity:.35 } } .b1 { animation:b1 9.0s infinite; }
+    @keyframes b2 { 0%,40.00% { stroke-opacity:.35 } 42.22%,57.78% { stroke-opacity:1 } 61.11%,100% { stroke-opacity:.35 } } .b2 { animation:b2 9.0s infinite; }
+    @keyframes b3 { 0%,56.67% { stroke-opacity:.35 } 58.89%,74.44% { stroke-opacity:1 } 77.78%,100% { stroke-opacity:.35 } } .b3 { animation:b3 9.0s infinite; }
+    @media (prefers-reduced-motion: reduce) { * { animation:none !important; } }
+  </style>
+  <rect width="960" height="360" rx="20" fill="#0f1420"/>
+  <text x="40" y="54" font-size="26" font-weight="800">A clean, layered app</text>
+  <text x="40" y="80" font-size="14" class="muted">Each request passes through routers, schema validation, models, then the database.</text>
+  <rect x="60" y="120" width="300" height="40" rx="10" fill="#1a1205" stroke="#ffb02e" stroke-opacity=".6"/>
+  <text x="76" y="145" font-size="12" font-weight="700" style="fill:#ffd88a">🔐 JWT auth · app/utils/security.py</text>
+  <text x="372" y="145" font-size="11" class="muted">guards protected routes</text>
+  <g class="b0"><rect x="60" y="190" width="160" height="80" rx="12" fill="#009688" fill-opacity=".1" stroke="#009688" stroke-width="2"/></g><text x="140.0" y="222" text-anchor="middle" font-size="15" font-weight="700">Routers</text><text x="140.0" y="244" text-anchor="middle" font-size="10" class="mono muted">auth · users</text><line x1="220" y1="230" x2="250" y2="230" stroke="#2c3750" stroke-width="2" stroke-dasharray="3 5"/><g class="b1"><rect x="250" y="190" width="160" height="80" rx="12" fill="#05b8a6" fill-opacity=".1" stroke="#05b8a6" stroke-width="2"/></g><text x="330.0" y="222" text-anchor="middle" font-size="15" font-weight="700">Schemas</text><text x="330.0" y="244" text-anchor="middle" font-size="10" class="mono muted">Pydantic validation</text><line x1="410" y1="230" x2="440" y2="230" stroke="#2c3750" stroke-width="2" stroke-dasharray="3 5"/><g class="b2"><rect x="440" y="190" width="170" height="80" rx="12" fill="#3ec7ff" fill-opacity=".1" stroke="#3ec7ff" stroke-width="2"/></g><text x="525.0" y="222" text-anchor="middle" font-size="15" font-weight="700">Models</text><text x="525.0" y="244" text-anchor="middle" font-size="10" class="mono muted">SQLAlchemy ORM</text><line x1="610" y1="230" x2="640" y2="230" stroke="#2c3750" stroke-width="2" stroke-dasharray="3 5"/><g class="b3"><rect x="640" y="190" width="150" height="80" rx="12" fill="#b58cff" fill-opacity=".1" stroke="#b58cff" stroke-width="2"/></g><text x="715.0" y="222" text-anchor="middle" font-size="15" font-weight="700">Database</text><text x="715.0" y="244" text-anchor="middle" font-size="10" class="mono muted">async session</text>
+  <circle class="f0" r="6" fill="#009688"/><circle class="f1" r="6" fill="#05b8a6"/><circle class="f2" r="6" fill="#3ec7ff"/>
+  <text x="40" y="320" font-size="12" class="muted">Async throughout · tested with <tspan class="mono">pytest</tspan> · containerized with a multi-stage <tspan class="mono">Dockerfile</tspan>.</text>
+</svg>
