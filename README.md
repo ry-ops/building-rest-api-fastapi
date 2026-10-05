@@ -1,306 +1,78 @@
-# Building REST APIs with FastAPI
-
 <p align="center">
-  <img src="hero.svg" alt="Building REST APIs with FastAPI" width="100%">
+  <img src="hero.svg" width="100%" alt="A POST /users request is validated field by field against a Pydantic schema, returns 201, and FastAPI generates interactive Swagger and ReDoc docs automatically.">
 </p>
 
-A production-ready FastAPI application demonstrating best practices for building high-performance REST APIs with automatic documentation, type safety, and modern Python features.
+<h1 align="center">Building REST APIs with FastAPI</h1>
 
-## Features
+<p align="center"><b>A production-ready FastAPI starter.</b> Type-safe requests, automatic interactive docs, async SQLAlchemy, JWT auth and a full test suite — the modern-Python API baseline, ready to build on.</p>
 
-- **Fast Performance**: Built on Starlette and Pydantic for blazing-fast request handling
-- **Automatic Documentation**: Interactive API docs with Swagger UI and ReDoc
-- **Type Safety**: Full type hints with Pydantic models for request/response validation
-- **Async Support**: Async/await for high concurrency
-- **Database Integration**: SQLAlchemy ORM with async support
-- **Authentication**: JWT-based authentication
-- **Testing**: Comprehensive test suite with pytest
-- **Docker Ready**: Multi-stage Dockerfile for production deployment
+<p align="center">
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.11+-009688" alt="Python 3.11+"></a>
+  <img src="https://img.shields.io/badge/FastAPI-async-05b8a6" alt="FastAPI">
+  <img src="https://img.shields.io/badge/auth-JWT-ffb02e" alt="JWT auth">
+  <img src="https://img.shields.io/badge/tests-pytest-3ddc84" alt="pytest">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b96ad" alt="MIT"></a>
+</p>
 
-## Quick Start
+---
 
-### Prerequisites
+## Why FastAPI
 
-- Python 3.11+
-- Docker (optional, for containerized deployment)
+You annotate your request and response types once, and FastAPI does the rest: **validates** every request against your Pydantic schema, **serializes** typed responses, and **generates interactive docs** at `/docs` and `/redoc` — all with async speed on Starlette.
 
-### Local Development
+## What's inside
 
-1. Clone the repository:
+<p align="center">
+  <img src="docs/architecture.svg" width="100%" alt="A request flows through routers (auth, users), Pydantic schemas, SQLAlchemy models, then the async database; JWT guards protected routes.">
+</p>
+
+- **Routers** (`app/routers/`) — `auth` and `users` endpoints.
+- **Schemas** (`app/schemas/`) — Pydantic models validate requests and shape responses.
+- **Models** (`app/models/`) — SQLAlchemy ORM, async.
+- **Security** (`app/utils/security.py`) — JWT auth guarding protected routes.
+- **Tests** (`tests/`) — pytest across auth, users and the app.
+- **Docker** — a multi-stage `Dockerfile` and `docker-compose.yml`.
+
+## Quick start
+
 ```bash
 git clone https://github.com/ry-ops/building-rest-api-fastapi.git
 cd building-rest-api-fastapi
-```
-
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
+python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-4. Run the development server:
-```bash
+cp .env.example .env                                  # set SECRET_KEY etc.
 uvicorn app.main:app --reload
 ```
 
-5. Access the API:
-   - API: http://localhost:8000
-   - Interactive docs: http://localhost:8000/docs
-   - Alternative docs: http://localhost:8000/redoc
+Then open:
+- **API** — http://localhost:8000
+- **Swagger UI** — http://localhost:8000/docs
+- **ReDoc** — http://localhost:8000/redoc
 
-### Docker Deployment
-
-```bash
-docker build -t fastapi-app .
-docker run -p 8000:8000 fastapi-app
-```
-
-## Project Structure
-
-```
-.
-├── app/
-│   ├── __init__.py
-│   ├── main.py                 # Application entry point
-│   ├── config.py               # Configuration management
-│   ├── database.py             # Database setup
-│   ├── dependencies.py         # Dependency injection
-│   ├── models/                 # SQLAlchemy models
-│   │   ├── __init__.py
-│   │   └── user.py
-│   ├── schemas/                # Pydantic schemas
-│   │   ├── __init__.py
-│   │   ├── user.py
-│   │   └── token.py
-│   ├── routers/                # API route handlers
-│   │   ├── __init__.py
-│   │   ├── auth.py
-│   │   └── users.py
-│   └── utils/                  # Utility functions
-│       ├── __init__.py
-│       ├── security.py
-│       └── validation.py
-├── tests/
-│   ├── __init__.py
-│   ├── test_main.py
-│   ├── test_auth.py
-│   └── test_users.py
-├── examples/
-│   ├── client.py               # Example API client
-│   └── load_test.py            # Load testing script
-├── documentation/
-│   ├── API.md                  # API endpoint documentation
-│   ├── DEPLOYMENT.md           # Deployment guide
-│   └── DEVELOPMENT.md          # Development guide
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
-├── .env.example
-└── README.md
-```
-
-## API Endpoints
-
-### Authentication
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and receive JWT token
-- `POST /auth/refresh` - Refresh access token
-
-### Users
-- `GET /users/me` - Get current user profile
-- `PUT /users/me` - Update current user profile
-- `GET /users/{user_id}` - Get user by ID (admin only)
-- `GET /users` - List all users (admin only)
-
-### Health
-- `GET /health` - Health check endpoint
-- `GET /` - API information
-
-## Configuration
-
-Copy `.env.example` to `.env` and configure:
-
-```env
-# Application
-APP_NAME=FastAPI Application
-APP_VERSION=1.0.0
-DEBUG=False
-
-# Database
-DATABASE_URL=postgresql+asyncpg://user:password@localhost/dbname
-
-# Security
-SECRET_KEY=your-secret-key-here
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-# CORS
-CORS_ORIGINS=["http://localhost:3000"]
-```
-
-## Development
-
-### Running Tests
+<details>
+<summary><b>Docker</b></summary>
 
 ```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=app tests/
-
-# Run specific test file
-pytest tests/test_users.py
+docker compose up --build
 ```
-
-### Code Quality
+</details>
 
 ```bash
-# Format code
-black app/ tests/
-
-# Sort imports
-isort app/ tests/
-
-# Type checking
-mypy app/
-
-# Linting
-ruff check app/ tests/
+pytest                 # run the test suite
 ```
 
-### Database Migrations
+## Learn from it
 
-```bash
-# Create a new migration
-alembic revision --autogenerate -m "Description"
+The tutorial docs walk through the design, development and deployment:
+- [documentation/API.md](documentation/API.md)
+- [documentation/DEVELOPMENT.md](documentation/DEVELOPMENT.md)
+- [documentation/DEPLOYMENT.md](documentation/DEPLOYMENT.md)
 
-# Apply migrations
-alembic upgrade head
-
-# Rollback migration
-alembic downgrade -1
-```
-
-## Examples
-
-### Using the API Client
-
-```python
-from examples.client import APIClient
-
-# Initialize client
-client = APIClient(base_url="http://localhost:8000")
-
-# Register a user
-user = client.register(
-    email="user@example.com",
-    password="securepassword",
-    full_name="John Doe"
-)
-
-# Login
-token = client.login(email="user@example.com", password="securepassword")
-
-# Get current user
-profile = client.get_current_user(token)
-```
-
-### Making Direct Requests
-
-```python
-import requests
-
-# Register
-response = requests.post(
-    "http://localhost:8000/auth/register",
-    json={
-        "email": "user@example.com",
-        "password": "securepassword",
-        "full_name": "John Doe"
-    }
-)
-
-# Login
-response = requests.post(
-    "http://localhost:8000/auth/login",
-    data={
-        "username": "user@example.com",
-        "password": "securepassword"
-    }
-)
-token = response.json()["access_token"]
-
-# Get profile
-response = requests.get(
-    "http://localhost:8000/users/me",
-    headers={"Authorization": f"Bearer {token}"}
-)
-```
-
-## Deployment
-
-See [documentation/DEPLOYMENT.md](documentation/DEPLOYMENT.md) for detailed deployment instructions including:
-
-- Docker deployment
-- Kubernetes deployment
-- Cloud platform deployment (AWS, GCP, Azure)
-- Environment configuration
-- SSL/TLS setup
-- Monitoring and logging
-
-## Performance
-
-FastAPI is one of the fastest Python frameworks available:
-
-- Handles 10,000+ requests/second on modest hardware
-- Sub-millisecond response times for simple endpoints
-- Efficient async I/O for database and external API calls
-- Automatic JSON serialization with Pydantic
-
-See `examples/load_test.py` for performance benchmarking.
-
-## Security
-
-- Password hashing with bcrypt
-- JWT token-based authentication
-- CORS middleware configured
-- SQL injection protection via SQLAlchemy
-- Input validation with Pydantic
-- Rate limiting (recommended for production)
-
-## Documentation
-
-- [API Documentation](documentation/API.md) - Detailed API endpoint reference
-- [Development Guide](documentation/DEVELOPMENT.md) - Development best practices
-- [Deployment Guide](documentation/DEPLOYMENT.md) - Production deployment instructions
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+There's also an [`examples/client.py`](examples/client.py) showing how to call the API.
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Resources
-
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Pydantic Documentation](https://docs.pydantic.dev/)
-- [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
-- [Uvicorn Documentation](https://www.uvicorn.org/)
-
-## Support
-
-For issues and questions:
-- Check the [API Documentation](documentation/API.md)
-- Review existing GitHub issues
-- Open a new issue with detailed information
+MIT. See [LICENSE](LICENSE).
 
 <!-- org-footer -->
 ---
